@@ -14,7 +14,9 @@ class App extends Component {
       letterIndex: 0,
       userInput: "",
       timerStarted: false,
-      seconds:0
+      seconds: 0,
+      secondsLeft: 10,
+      totalSeconds: 10
     };
   }
 
@@ -37,18 +39,36 @@ class App extends Component {
       })
       .catch(err => console.error(err));
   }
-  
+
   startTimer = e => {
     this.setState({
       timerStarted: true
-    })
-    this.timer = setInterval(()=>{
-      this.setState(prevState => ({
-        seconds: prevState.seconds+1,
-        wpm: Math.floor(prevState.wordIndex / (prevState.seconds+1) * 60)
-      }))
-    },1000);
-  }
+    });
+    this.timer = setInterval(() => {
+      if (this.state.secondsLeft === 0) {
+        clearInterval(this.timer);
+        this.setState({
+          timerStarted: false
+        })
+      } else {
+          this.setState(prevState => ({
+            secondsLeft: prevState.secondsLeft - 1,
+            wpm: Math.floor(
+              (prevState.wordIndex /
+                (prevState.totalSeconds - prevState.secondsLeft + 1)) *
+                60
+            )
+          }));
+
+      }
+    }, 1000);
+    // this.timer = setInterval(()=>{
+    //   this.setState(prevState => ({
+    //     seconds: prevState.seconds+1,
+    //     wpm: Math.floor(prevState.wordIndex / (prevState.seconds+1) * 60)
+    //   }))
+    // },1000);
+  };
 
   handleChange = e => {
     // console.log(e.target.value);
@@ -84,10 +104,11 @@ class App extends Component {
 
     return (
       <div className="container">
-      <header>
-        <h1>Type Writer App</h1>
-        <h1 className="timer">{this.state.seconds}</h1>
-      </header>
+        <header>
+          <h1>Type Writer App</h1>
+          {/* <h1 className="timer">{this.state.seconds}</h1> */}
+          <h1 className="timer">{this.state.secondsLeft}</h1>
+        </header>
         <div className="textToWrite">
           {this.state.words.map((word, wIndex) => {
             return (
