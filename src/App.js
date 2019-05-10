@@ -15,8 +15,9 @@ class App extends Component {
       userInput: "",
       timerStarted: false,
       seconds: 0,
-      secondsLeft: 10,
-      totalSeconds: 10
+      secondsLeft: 60,
+      totalSeconds: 60,
+      wpm: 0
     };
   }
 
@@ -31,16 +32,36 @@ class App extends Component {
           .match(/\w+/g)
           .filter(word => word !== "p")
           .map(word => word + " ");
+
+        words = words.slice(0,25);
+
+        words[words.length - 1] = words[words.length - 1].replace(" ", ".");
+
         this.setState({
           text: res.data.text_out,
-          words
+          words: words
         });
         console.log(words);
       })
       .catch(err => console.error(err));
   }
 
+  resetTimer = e => {
+    clearInterval(this.timer);
+    this.setState({
+      wordIndex: 0,
+      letterIndex: 0,
+      userInput: "",
+      timerStarted: false,
+      seconds: 0,
+      secondsLeft: 60,
+      totalSeconds: 60,
+      wpm: 0
+    });
+  }
+
   startTimer = e => {
+    this.resetTimer();
     this.setState({
       timerStarted: true
     });
@@ -49,19 +70,19 @@ class App extends Component {
         clearInterval(this.timer);
         this.setState({
           timerStarted: false
-        })
+        });
       } else {
-          this.setState(prevState => ({
-            secondsLeft: prevState.secondsLeft - 1,
-            wpm: Math.floor(
-              (prevState.wordIndex /
-                (prevState.totalSeconds - prevState.secondsLeft + 1)) *
-                60
-            )
-          }));
-
+        this.setState(prevState => ({
+          secondsLeft: prevState.secondsLeft - 1,
+          wpm: Math.floor(
+            (prevState.wordIndex /
+              (prevState.totalSeconds - prevState.secondsLeft + 1)) *
+              60
+          )
+        }));
       }
     }, 1000);
+    // Count Up:
     // this.timer = setInterval(()=>{
     //   this.setState(prevState => ({
     //     seconds: prevState.seconds+1,
@@ -76,11 +97,20 @@ class App extends Component {
     const curWord = this.state.words[this.state.wordIndex];
     this.setState(prevState => {
       if (curWord === userInput) {
-        return {
-          wordIndex: prevState.wordIndex + 1,
-          userInput: "",
-          letterIndex: 0
-        };
+        if (prevState.wordIndex === this.state.words.length - 1) {
+          clearInterval(this.timer);
+          this.setState({
+            wordIndex: prevState.wordIndex + 1,
+            userInput: "",
+            letterIndex: 0,
+            timerStarted: false
+          });
+        } else
+          return {
+            wordIndex: prevState.wordIndex + 1,
+            userInput: "",
+            letterIndex: 0
+          };
       } else if (curWord.indexOf(userInput) === 0) {
         // console.log("Word underprogression");
         return {
@@ -158,9 +188,10 @@ class App extends Component {
           readOnly={!this.state.timerStarted}
         />
 
-        <button onClick={this.startTimer}>Start Timer</button>
+        <button onClick={this.startTimer} disabled={this.state.timerStarted}>Start Timer</button>
+        <button onClick={this.resetTimer}>Reset</button>
 
-        <h2>WPA: {this.state.wpm}</h2>
+        <h2>WPM: {this.state.wpm}</h2>
       </div>
     );
   }
