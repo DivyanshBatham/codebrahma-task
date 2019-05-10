@@ -12,7 +12,9 @@ class App extends Component {
       words: [],
       wordIndex: 0,
       letterIndex: 0,
-      userInput: ""
+      userInput: "",
+      timerStarted: false,
+      seconds:0
     };
   }
 
@@ -34,6 +36,18 @@ class App extends Component {
         console.log(words);
       })
       .catch(err => console.error(err));
+  }
+  
+  startTimer = e => {
+    this.setState({
+      timerStarted: true
+    })
+    this.timer = setInterval(()=>{
+      this.setState(prevState => ({
+        seconds: prevState.seconds+1,
+        wpm: Math.floor(prevState.wordIndex / (prevState.seconds+1) * 60)
+      }))
+    },1000);
   }
 
   handleChange = e => {
@@ -91,7 +105,10 @@ class App extends Component {
 
     return (
       <div className="container">
+      <header>
         <h1>Type Writer App</h1>
+        <h1 className="timer">{this.state.seconds}</h1>
+      </header>
         <div className="textToWrite">
           {this.state.words.map((word, wIndex) => {
             return (
@@ -152,7 +169,12 @@ class App extends Component {
           className={classNames({
             red_bg: this.state.word_red
           })}
+          readOnly={!this.state.timerStarted}
         />
+
+        <button onClick={this.startTimer}>Start Timer</button>
+
+        <h2>WPA: {this.state.wpm}</h2>
       </div>
     );
   }
