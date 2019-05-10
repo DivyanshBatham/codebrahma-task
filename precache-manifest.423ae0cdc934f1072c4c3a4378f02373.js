@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5d45941e43301eb7892c591e0e25dacb",
+    "revision": "b8bb50a3fe327ab10a3db52904403467",
     "url": "/codebrahma-task/index.html"
   },
   {
-    "revision": "34738efdc06a0e71d4d7",
+    "revision": "8c1c4dbf5e40265dbb7d",
     "url": "/codebrahma-task/static/css/main.7aa135db.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/codebrahma-task/static/js/2.a9d83c36.chunk.js"
   },
   {
-    "revision": "34738efdc06a0e71d4d7",
-    "url": "/codebrahma-task/static/js/main.4988548d.chunk.js"
+    "revision": "8c1c4dbf5e40265dbb7d",
+    "url": "/codebrahma-task/static/js/main.386e1617.chunk.js"
   },
   {
     "revision": "91ceb292c09f1721265c",
