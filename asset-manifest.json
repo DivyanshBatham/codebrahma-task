@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/codebrahma-task/static/css/main.7aa135db.chunk.css",
+    "main.js": "/codebrahma-task/static/js/main.4988548d.chunk.js",
+    "main.js.map": "/codebrahma-task/static/js/main.4988548d.chunk.js.map",
+    "runtime~main.js": "/codebrahma-task/static/js/runtime~main.f73b10ae.js",
+    "runtime~main.js.map": "/codebrahma-task/static/js/runtime~main.f73b10ae.js.map",
+    "static/js/2.a9d83c36.chunk.js": "/codebrahma-task/static/js/2.a9d83c36.chunk.js",
+    "static/js/2.a9d83c36.chunk.js.map": "/codebrahma-task/static/js/2.a9d83c36.chunk.js.map",
+    "index.html": "/codebrahma-task/index.html",
+    "precache-manifest.32010b98a6f187d039e863781405908a.js": "/codebrahma-task/precache-manifest.32010b98a6f187d039e863781405908a.js",
+    "service-worker.js": "/codebrahma-task/service-worker.js",
+    "static/css/main.7aa135db.chunk.css.map": "/codebrahma-task/static/css/main.7aa135db.chunk.css.map"
+  }
+}
