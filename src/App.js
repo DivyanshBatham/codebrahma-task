@@ -51,7 +51,7 @@ class App extends Component {
   }
 
   handleChange = e => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     const userInput = e.target.value;
     const curWord = this.state.words[this.state.wordIndex];
     this.setState(prevState => {
@@ -62,40 +62,19 @@ class App extends Component {
           letterIndex: 0
         };
       } else if (curWord.indexOf(userInput) === 0) {
-        console.log("Word underprogression");
+        // console.log("Word underprogression");
         return {
           userInput,
           word_red: false,
-          // wordClass: ''
           letterIndex: userInput.length
         };
       } else {
         return {
           userInput,
           word_red: true
-          // wordClass: "word__red"
         };
       }
     });
-
-    // if (curWord === userInput) {
-    //   console.log("User input is correct, increase the index");
-    //   this.setState(prevState => {
-    //     return {
-    //       wordIndex: prevState.wordIndex + 1,
-    //       userInput: "",
-    //       letterIndex: 0
-    //     };
-    //   });
-    // } else {
-    //   console.log("letterIndex = ", userInput.length - 1);
-    //   this.setState(prevState => {
-    //     return {
-    //       userInput,
-    //       letterIndex: userInput.length - 1
-    //     };
-    //   });
-    // }
   };
 
   render() {
@@ -119,13 +98,6 @@ class App extends Component {
                     word__correct: wIndex < wordIndex,
                     word__red: this.state.word_red && wIndex === wordIndex
                   })}
-                  // className={
-                  //   wIndex === wordIndex
-                  //     ? "word__current"
-                  //     : wIndex <= wordIndex
-                  //     ? "word__correct"
-                  //     : "word"
-                  // }
                   key={wIndex}
                 >
                   {/* {word} */}
@@ -140,15 +112,8 @@ class App extends Component {
                               letterIndex + userInput.length - letterIndex &&
                             this.state.word_red
                         })}
-                        // className={
-                        //   lIndex === letterIndex &&
-                        //   userInput[letterIndex] === letter
-                        //     ? "green"
-                        //     : "Cur"
-                        // }
                         key={lIndex}
                       >
-                        {/* { lIndex == letterIndex && "$" } */}
                         {letter}
                       </span>
                     ) : (
