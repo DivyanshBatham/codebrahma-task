@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "http://DivyanshBatham.github.io/codebrahma-task",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "classnames": "^2.2.6",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
